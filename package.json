@@ -1,0 +1,28 @@
+{
+  "name": "apoth-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FenrirUnbound/apotheosis.git"
+  },
+  "author": "FenrirUnbound",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FenrirUnbound/apotheosis/issues"
+  },
+  "homepage": "https://github.com/FenrirUnbound/apotheosis",
+  "private": true,
+  "devDependencies": {
+    "chai": "^2.2.0",
+    "mocha": "^2.2.1"
+  },
+  "dependencies": {
+    "hapi": "^8.4.0",
+    "q": "^1.2.0"
+  }
+}
