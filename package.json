@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "gulp": "./node_modules/.bin/gulp",
+    "local": "npm run gulp && foreman start",
     "test": "mocha --recursive"
   },
   "repository": {
@@ -22,6 +23,7 @@
     "browserify": "^9.0.4",
     "chai": "^2.2.0",
     "gulp": "^3.8.11",
+    "jquery": "^2.1.3",
     "mocha": "^2.2.1",
     "mockery": "^1.4.0",
     "react": "^0.13.1",
