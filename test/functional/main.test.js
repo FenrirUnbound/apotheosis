@@ -1,14 +1,18 @@
 var expect = require('chai').expect;
 var mockery = require('mockery');
+var path = require('path');
 
 describe('Main', function describeMain() {
   var server;
 
   before(function onceBefore() {
+    var env;
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false
     });
+    env = require('node-env-file');
+    env(path.resolve(__dirname, '..', '..', '.env'), {raise: false});
   });
 
   beforeEach(function beforeAll(done) {
