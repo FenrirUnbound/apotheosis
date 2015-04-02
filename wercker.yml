@@ -5,6 +5,9 @@ build:
   steps:
     # A step that executes `npm install` command
     - npm-install
+    - script:
+        name: "compile client-side javascript"
+        code: npm run gulp
     # A step that executes `npm test` command
     - npm-test
 
