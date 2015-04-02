@@ -1,14 +1,18 @@
 var expect = require('chai').expect;
 var mockery = require('mockery');
+var path = require('path');
 
 describe('Main', function describeMain() {
   var server;
 
   before(function onceBefore() {
+    var env;
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false
     });
+    env = require('node-env-file');
+    env(path.resolve(__dirname, '..', '..', '.env'), {raise: false});
   });
 
   beforeEach(function beforeAll(done) {
@@ -53,6 +57,22 @@ describe('Main', function describeMain() {
         expect(response.statusCode).to.equal(200);
         expect(response.headers).to.have.property('content-type')
           .that.contains('text/html');
+        done();
+      });
+    });
+  });
+
+  describe('-- Games', function describeGames() {
+    it('should create a game', function testCreateGame(done) {
+      server.inject({
+        method: 'POST',
+        url: '/api/games'
+      }, function (response) {
+        var data;
+        expect(response.statusCode).to.equal(201);
+        data = JSON.parse(response.payload);
+        expect(data).to.have.property('gameId')
+          .that.is.greaterThan(0);
         done();
       });
     });
