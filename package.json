@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "gulp": "./node_modules/.bin/gulp",
     "test": "mocha --recursive"
   },
   "repository": {
@@ -18,8 +19,11 @@
   "homepage": "https://github.com/FenrirUnbound/apotheosis",
   "private": true,
   "devDependencies": {
+    "browserify": "^9.0.4",
     "chai": "^2.2.0",
-    "mocha": "^2.2.1"
+    "gulp": "^3.8.11",
+    "mocha": "^2.2.1",
+    "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
     "hapi": "^8.4.0",
