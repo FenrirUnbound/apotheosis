@@ -57,4 +57,20 @@ describe('Main', function describeMain() {
       });
     });
   });
+
+  describe('-- Games', function describeGames() {
+    it('should create a game', function testCreateGame(done) {
+      server.inject({
+        method: 'POST',
+        url: '/api/games'
+      }, function (response) {
+        var data;
+        expect(response.statusCode).to.equal(201);
+        data = JSON.parse(response.payload);
+        expect(data).to.have.property('gameId')
+          .that.is.greaterThan(0);
+        done();
+      });
+    });
+  });
 });
