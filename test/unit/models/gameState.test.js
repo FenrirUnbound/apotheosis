@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
 
-describe.only('Game State', function describeGameState() {
+describe('Game State', function describeGameState() {
   var gameStates = require('../../../lib/models/gameState');
 
   it('has the CREATED state', function testCreated() {
