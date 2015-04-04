@@ -25,8 +25,11 @@ describe('Main', function describeMain() {
   });
 
   afterEach(function afterAll(done) {
-    server.stop(done);
-    mockery.resetCache();
+    server.stop(function () {
+        server = null;
+        mockery.resetCache();
+        done();
+    });
   });
 
   after(function onceAfter() {
@@ -64,6 +67,8 @@ describe('Main', function describeMain() {
 
   describe('-- Games', function describeGames() {
     it('should create a game', function testCreateGame(done) {
+      var CREATED_STATE = 0;
+
       server.inject({
         method: 'POST',
         url: '/api/games'
@@ -73,6 +78,8 @@ describe('Main', function describeMain() {
         data = JSON.parse(response.payload);
         expect(data).to.have.property('gameId')
           .that.is.greaterThan(0);
+        expect(data).to.have.property('gameState')
+          .that.equal(CREATED_STATE);
         done();
       });
     });
