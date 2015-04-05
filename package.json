@@ -22,6 +22,7 @@
   "devDependencies": {
     "atob": "^1.1.2",
     "browserify": "^9.0.4",
+    "btoa": "^1.1.2",
     "chai": "^2.2.0",
     "cookie": "^0.1.2",
     "gulp": "^3.8.11",
