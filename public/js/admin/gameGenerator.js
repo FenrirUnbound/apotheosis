@@ -1,5 +1,5 @@
 var React = require('react');
-var $ = require('jquery');
+var $ = require('zepto-browserify');
 
 module.exports = React.createClass({
   displayName: 'createGame',
