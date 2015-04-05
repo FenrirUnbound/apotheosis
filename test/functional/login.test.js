@@ -39,15 +39,17 @@ describe.only('Login', function describeLogin() {
     mockery.disable();
   });
 
-  function parseForCookies(response) {
+  function parseAndValidateCookie(response) {
     var headerInformation = response.headers['set-cookie'].pop();
     var cookies = cookie.parse(headerInformation);
     var result = {};
 
-    Object.keys(cookies).forEach(function (key) {
-      var buffer = new Buffer(cookies[key], 'base64');
-      result[key] = JSON.parse(buffer);
-    });
+    expect(cookies).to.have.property('player');
+    expect(cookies).to.have.property('Path')
+      .that.deep.equal('/');
+
+    var buffer = new Buffer(cookies.player, 'base64');
+    result.player = JSON.parse(buffer);
 
     return result;
   }
@@ -64,7 +66,7 @@ describe.only('Login', function describeLogin() {
       expect(response.statusCode).to.equal(204);
       expect(response.headers).to.have.property('set-cookie');
 
-      cookies = parseForCookies(response);
+      cookies = parseAndValidateCookie(response);
       expect(cookies).to.have.property('player')
         .that.equal(testId);
 
