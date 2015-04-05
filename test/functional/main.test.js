@@ -1,3 +1,5 @@
+var atob = require('atob');
+var cookie = require('cookie');
 var expect = require('chai').expect;
 var mockery = require('mockery');
 var path = require('path');
@@ -66,6 +68,17 @@ describe('Main', function describeMain() {
   });
 
   describe('-- Games', function describeGames() {
+    function checkAndGetCookies(response) {
+      var cookies;
+
+      expect(response.headers).to.have.property('set-cookie');
+
+      cookies = cookie.parse(response.headers['set-cookie'].shift());
+      expect(cookies).to.have.property('player');
+
+      return JSON.parse(atob(cookies.player));
+    }
+
     it('should create a game', function testCreateGame(done) {
       var CREATED_STATE = 0;
 
@@ -74,12 +87,32 @@ describe('Main', function describeMain() {
         url: '/api/games'
       }, function (response) {
         var data;
+        var playerData;
         expect(response.statusCode).to.equal(201);
+        playerData = checkAndGetCookies(response);
+
         data = JSON.parse(response.payload);
         expect(data).to.have.property('gameId')
           .that.is.greaterThan(0);
         expect(data).to.have.property('gameState')
           .that.equal(CREATED_STATE);
+        expect(data).to.have.property('creator')
+          .that.equal(playerData.playerId);
+        done();
+      });
+    });
+
+    it('should create game with cookie data', function testCookieData(done) {
+      server.inject({
+        headers: {
+          "set-cookie": "player=eyJwbGF5ZXJJZCI6MTIzNDU2Nzg5fQ=="  // {playerId: 123456789}
+        },
+        method: 'POST',
+        url: '/api/games'
+      }, function (response) {
+        var playerData = checkAndGetCookies(response);
+        expect(playerData.playerId).to.deep.equal(123456789);
+
         done();
       });
     });
