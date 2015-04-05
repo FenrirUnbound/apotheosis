@@ -101,5 +101,20 @@ describe('Main', function describeMain() {
         done();
       });
     });
+
+    it('should create game with cookie data', function testCookieData(done) {
+      server.inject({
+        headers: {
+          "set-cookie": "player=eyJwbGF5ZXJJZCI6MTIzNDU2Nzg5fQ=="  // {playerId: 123456789}
+        },
+        method: 'POST',
+        url: '/api/games'
+      }, function (response) {
+        var playerData = checkAndGetCookies(response);
+        expect(playerData.playerId).to.deep.equal(123456789);
+
+        done();
+      });
+    });
   });
 });
