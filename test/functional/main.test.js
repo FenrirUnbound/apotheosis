@@ -80,6 +80,9 @@ describe('Main', function describeMain() {
           .that.is.greaterThan(0);
         expect(data).to.have.property('gameState')
           .that.equal(CREATED_STATE);
+        expect(data).to.have.property('creator')
+          .that.is.greaterThan(0)
+          .and.is.at.most(Date.now());
         done();
       });
     });
