@@ -1,7 +1,7 @@
 var CreateGame = require('./admin/gameGenerator');
 var GameList = require('./admin/gameList');
 var React = require('react');
-var $ = require('jquery');
+var $ = require('zepto-browserify').$;
 
 var Admin = React.createClass({
   displayName: 'admin',
