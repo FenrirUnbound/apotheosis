@@ -1,10 +1,11 @@
-var btoa = require('btoa');
+var atob = require('atob');
 var cookie = require('cookie');
 var expect = require('chai').expect;
 var mockery = require('mockery');
 var path = require('path');
+var q = require('q');
 
-describe.only('Login', function describeLogin() {
+describe('Login', function describeLogin() {
   var server;
 
   before(function onceBefore() {
@@ -48,8 +49,7 @@ describe.only('Login', function describeLogin() {
     expect(cookies).to.have.property('Path')
       .that.deep.equal('/');
 
-    var buffer = new Buffer(cookies.player, 'base64');
-    result.player = JSON.parse(buffer);
+    result.player = parseInt(atob(cookies.player), 10);
 
     return result;
   }
