@@ -14,11 +14,10 @@ var Login = React.createClass({
       dataType: 'json',
       data: {playerId: value},
       success: function (serverData) {
-        console.log(document.cookie);
+        console.log('successfully logged in')
         var cookies = cookieParser.parse(document.cookie);
         var stuff = atob(cookies.player);
         console.log(stuff);
-        console.log(typeof stuff);
       }
     });
   },
