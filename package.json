@@ -34,6 +34,7 @@
   "dependencies": {
     "atob": "^1.1.2",
     "cookie": "^0.1.2",
+    "fenrirunbound-dice-town": "git://github.com/FenrirUnbound/dice-town.git",
     "hapi": "^8.4.0",
     "joi": "^6.1.0",
     "node-env-file": "^0.1.7",
